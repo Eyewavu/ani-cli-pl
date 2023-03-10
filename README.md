@@ -5,7 +5,7 @@ command-line tool for searching and watching anime episodes. You can easily sear
 ## Getting Started
 To use this tool, you will need to have Python 3.6 or higher installed on your system, as well as the MPV media player. Once you have those installed, clone this repository by running the following command in your terminal
 ```bash
-git clone repo-url
+git clone https://github.com/Eyewavu/ani-cli-pl.git
 cd ani-cli-pl
 ```
 
