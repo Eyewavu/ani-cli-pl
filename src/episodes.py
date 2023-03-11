@@ -6,6 +6,7 @@ def get_episodes( link:str ):
 
   results =[]
   episodes =d(".list-episode-checkboxes>tr")
+
   for this in episodes:
     item =d(this)
 
@@ -15,7 +16,7 @@ def get_episodes( link:str ):
       "date": item.find(".ep-date").text(),
       "id": int(item.find("td:nth-child(1)").text()),
       "lang": re.findall(r'(?<=title=").+(?=">)', str(item.find(".flag-icon").parent().html())) or [],
-      "avaiable": "fa-check" in item.find("i").attr("class")
+      "avaiable": "fa-check" in (item.find("i").attr("class") or "")
     })
 
   return [ item for item in results if item["link"] != "" ]
