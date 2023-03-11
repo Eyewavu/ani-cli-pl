@@ -1,10 +1,10 @@
-import requests
 from time import sleep
-from src.utils import cls
+import requests
 from pyquery import PyQuery as pq
+from src.utils import cls
 
-auth ="X2d1ZXN0XzowLDUsMjEwMDAwMDAsMjU1LDQxNzQyOTM2NDQ%3D"
-headers ={
+AUTH ="X2d1ZXN0XzowLDUsMjEwMDAwMDAsMjU1LDQxNzQyOTM2NDQ%3D"
+HEADERS ={
   "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
   "accept-language": "pl-PL,pl;q=0.9,en-US;q=0.8,en;q=0.7",
   "cache-control": "max-age=0",
@@ -20,18 +20,16 @@ headers ={
 
 def get_video_link( playerid:str ):
   session =requests.Session()
-  url1 =f"https://api4.shinden.pl/xhr/{playerid}/player_load?auth={auth}"
-  url2 =f"https://api4.shinden.pl/xhr/{playerid}/player_show?auth={auth}&width=0&height=-1"
-  
-  session.get(url1)
+  url1 =f"https://api4.shinden.pl/xhr/{playerid}/player_load?auth={AUTH}"
+  url2 =f"https://api4.shinden.pl/xhr/{playerid}/player_show?auth={AUTH}&width=0&height=-1"
+
+  session.get(url1,headers=HEADERS)
   for i in range(5):
     print(f"{5 -i} seconds remaining...")
     sleep(1)
     cls()
-  
-  response =session.get(url2)
+
+  response =session.get(url2,headers=HEADERS)
   d =pq(response.content)
 
   return str(d("iframe").attr("src"))
-
-

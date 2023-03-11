@@ -1,7 +1,4 @@
-from pyquery import PyQuery as pq
-from requests import get
 from src.utils import fetch
-import re
 
 def get_player_ids( link:str ):
   d =fetch(f"https://shinden.pl{link}")

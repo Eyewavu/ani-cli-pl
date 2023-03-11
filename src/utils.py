@@ -1,7 +1,7 @@
+import os
 from colorama import Fore
 from pyquery import PyQuery as pq
 from requests import get
-import os
 
 def fetch( url:str ):
   headers ={
@@ -11,7 +11,7 @@ def fetch( url:str ):
     "Accept-Language": "pl-PL,pl;q=0.9,en-US;q=0.8,en,q=0.7"
   }
 
-  response =get(url,headers=headers)
+  response =get(url,headers=headers,timeout=10)
   return pq(response.content)
 
 def cls():
@@ -24,7 +24,7 @@ def createMenu( arr:list ):
 
     for i,item in enumerate(arr):
       index =f"{i+1: }" if i+1 < 10 else str(i+1)
-      
+
       print(f"{Fore.YELLOW}{index}. {item}{Fore.RESET}")
 
 
@@ -32,5 +32,5 @@ def createMenu( arr:list ):
     current_answer =int(response) if response.isdigit() else -1
     current_answer =0 if response == "q" else current_answer
     cls()
-  
+
   return current_answer

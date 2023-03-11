@@ -1,5 +1,5 @@
-from src.utils import fetch
 import re
+from src.utils import fetch
 
 def get_episodes( link:str ):
   d =fetch(f"https://shinden.pl{link}/episodes")

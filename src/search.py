@@ -1,9 +1,8 @@
-from requests import get
-from src.utils import fetch
 import urllib
+from src.utils import fetch
 
-def search( input:str ):
-  d =fetch(f"https://shinden.pl/series?search={urllib.parse.quote(input)}")
+def search( query:str ):
+  d =fetch(f"https://shinden.pl/series?search={urllib.parse.quote(query)}")
 
   list_items =d(".div-row")
   results =[]
@@ -16,7 +15,5 @@ def search( input:str ):
       "episodes": item.find(".episodes-col").attr("title") or "",
       "link": item.find("h3>a").attr("href") or ""
     })
-  
+
   return [ item for item in results if item["link"] != "" ]
-
-
