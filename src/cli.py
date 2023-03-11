@@ -1,11 +1,12 @@
-from subprocess import run as summon
 import argparse
+from webbrowser import open as open_url
 from colorama import Fore
 from src.search import search
 from src.episodes import get_episodes
 from src.players import get_player_ids
 from src.video import get_video_link
-from src.utils import createMenu
+from src.utils import create_menu
+
 
 def cli():
   parser =argparse.ArgumentParser("Anime CLI *PL*")
@@ -19,7 +20,7 @@ def cli():
   if args.search is not None:
     results =search( args.search )
     list_items =list(map(lambda item: f"{Fore.GREEN}\"{item['title']}\" {Fore.BLUE}{item['episodes']}",results))
-    answer =createMenu(list_items)
+    answer =create_menu(list_items)
 
     if answer == 0: return
     series_found =True
@@ -31,7 +32,7 @@ def cli():
   if series_found:
     results =get_episodes(series_link)
     list_items =list(map(lambda item: f"{Fore.GREEN}\"{item['title']}\" {Fore.GREEN if item['avaiable'] else Fore.RED}{'✓' if item['avaiable'] else 'x'}",results))
-    answer =createMenu(list_items)
+    answer =create_menu(list_items)
 
     if answer == 0: return
     episode_found =True
@@ -43,7 +44,7 @@ def cli():
   if episode_found:
     results =get_player_ids(episode_link)
     list_items =list(map(lambda item: f"{Fore.GREEN}\"{item['source']}\" {Fore.WHITE}{item['quality']} {Fore.RED}{item['dub_lang']} {Fore.WHITE}{item['sub_lang']}",results))
-    answer =createMenu(list_items)
+    answer =create_menu(list_items)
 
     if answer == 0: return
     player_found =True
@@ -52,4 +53,5 @@ def cli():
   if player_found:
     video_url =get_video_link(playerid)
     print(f"video found at: {video_url}")
-    summon(["mpv",video_url],check=False)
+
+    open_url(video_url)

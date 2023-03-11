@@ -1,4 +1,5 @@
 from time import sleep
+import re
 import requests
 from pyquery import PyQuery as pq
 from src.utils import cls
@@ -32,4 +33,9 @@ def get_video_link( playerid:str ):
   response =session.get(url2,headers=HEADERS)
   d =pq(response.content)
 
-  return str(d("iframe").attr("src"))
+  link =str(d("iframe").attr("src"))
+  link =re.sub(r"^\/{2}","",link)
+  if re.match(r"^https:\/{2}",link) is None:
+    link =f"https://{link}"
+
+  return link

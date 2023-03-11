@@ -17,7 +17,7 @@ def fetch( url:str ):
 def cls():
   os.system("cls" if os.name=="nt" else "clear")
 
-def createMenu( arr:list ):
+def create_menu( arr:list ):
   current_answer =-1
   while current_answer == -1:
     print(f"{Fore.YELLOW} 0. {Fore.RED} (Exit){Fore.RESET}")
