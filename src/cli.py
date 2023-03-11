@@ -1,5 +1,4 @@
 from colorama import Fore
-from importlib import import_module
 from src.search import search
 from src.episodes import get_episodes
 from src.players import get_player_ids
