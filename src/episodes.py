@@ -1,4 +1,3 @@
-from requests import get
 from src.utils import fetch
 import re
 
