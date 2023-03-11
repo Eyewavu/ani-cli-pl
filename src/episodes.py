@@ -1,4 +1,3 @@
-from pyquery import PyQuery as pq
 from requests import get
 from src.utils import fetch
 import re
